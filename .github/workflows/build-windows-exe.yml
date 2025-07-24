@@ -23,8 +23,11 @@ jobs:
         pip install pyinstaller
         pip install matplotlib
 
-    - name: Build EXE
-      run: pyinstaller --onefile QFTCalc.py
+    - name: Generate .spec file
+      run: pyinstaller --name QFTCalc --onefile QFTCalc.py
+
+    - name: Rebuild using spec (handles matplotlib data files)
+      run: pyinstaller QFTCalc.spec
 
     - name: Upload EXE artifact
       uses: actions/upload-artifact@v4
